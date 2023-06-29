@@ -95,12 +95,6 @@ public class TestController {
         }
     }
 
-    @GetMapping("/userinfo")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public String userAccess() {
-        return "User Content. new";
-    }
-
     @GetMapping("/user")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<User>> getAllByUserRole() {
@@ -136,11 +130,6 @@ public class TestController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/modinfo")
-    @PreAuthorize("hasRole('MODERATOR')")
-    public String moderatorAccess() {
-        return "Moderator Board.";
-    }
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<User>> getAllByAdminRole() {
@@ -157,12 +146,6 @@ public class TestController {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @GetMapping("/admininfo")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String adminAccess() {
-        return "Admin Board.";
     }
 
     /**
@@ -235,7 +218,7 @@ public class TestController {
     }
 
     /**
-     * Usuwa wszystkich graczy
+     * Usuwa wszystkich urzytkownikwów
      * @return
      */
     @DeleteMapping("/user")

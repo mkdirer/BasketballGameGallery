@@ -56,25 +56,9 @@ public class WebSecurityConfig{
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
 
-        // fix H2 database console: Refused to display ' in a frame because it set 'X-Frame-Options' to 'deny'
-        //http.headers().frameOptions().sameOrigin();
-
         http.authenticationProvider(authenticationProvider());
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
-//        http.csrf(AbstractHttpConfigurer::disable)
-//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//                .authorizeHttpRequests((request) -> request
-//                        .requestMatchers("/api/auth/**").permitAll()
-//                        .requestMatchers("/api/test/**").permitAll()
-//                        .requestMatchers("/**").permitAll()
-//                        .anyRequest().authenticated());
-//
-//        http.authenticationProvider(authenticationProvider());
-//
-//        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
