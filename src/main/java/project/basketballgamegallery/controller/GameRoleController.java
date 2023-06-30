@@ -1,8 +1,3 @@
-/**
-
- The GameRoleController class handles HTTP requests related to game roles in the basketball game gallery.
- It provides endpoints for retrieving, creating, updating, and deleting game roles, as well as managing associations with players.
- */
 package project.basketballgamegallery.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;

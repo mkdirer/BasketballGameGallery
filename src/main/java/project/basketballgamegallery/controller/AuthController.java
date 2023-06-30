@@ -93,10 +93,10 @@ public class AuthController {
         Set<AccessRight> accessRights = new HashSet<>();
         if (strRoles == null) {
             AccessRight userAccessRight1 = accessRightRepository.save(new AccessRight(EnumAccessRight.ROLE_USER));
-//            AccessRight userAccessRight2 = accessRightRepository.save(new AccessRight(EnumAccessRight.MODERATOR_ACCESS_RIGHT));
+            //AccessRight userAccessRight2 = accessRightRepository.save(new AccessRight(EnumAccessRight.MODERATOR_ACCESS_RIGHT));
             //AccessRight userAccessRight3 = accessRightRepository.save(new AccessRight(EnumAccessRight.ADMIN_ACCESS_RIGHT));
             accessRights.add(userAccessRight1);
-//            accessRights.add(userAccessRight2);
+            //accessRights.add(userAccessRight2);
             //accessRights.add(userAccessRight3);
         } else {
             strRoles.forEach(role -> {

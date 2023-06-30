@@ -26,12 +26,6 @@ public class TestController {
     UserRepository userRepository;
     @Autowired
     AccessRightRepository accessRightRepository;
-
-    /**
-     * Returns a welcome message for the BasketballGameGallery site.
-     *
-     * @return The welcome message
-     */
     @GetMapping("/all")
     public String allAccess() {
         return "Welcome to BasketballGameGallery! This site is designed for basketball enthusiasts. We offer a platform to track your favorite players, clubs, and completed matches.";
