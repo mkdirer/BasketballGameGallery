@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Klasa MatchController obslugujaca endpointy dotyczace meczy koszykarskich
+ * The MatchController class handles endpoints related to basketball matches.
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,9 +28,9 @@ public class MatchController {
     TeamRepository teamRepository;
 
     /**
-     * Zwraca wszystkie mecze lub takie w ktorych wystapil podana drużyna
-     * @param team
-     * @return
+     * Retrieves all matches or matches involving the specified team.
+     * @param team The team name (optional)
+     * @return ResponseEntity with a list of matches
      */
     @GetMapping("/matches")
     public ResponseEntity<List<Match>> getAllMatches(@RequestParam(required = false) String team) {
@@ -56,9 +56,9 @@ public class MatchController {
     }
 
     /**
-     * Wyszukuje mecz o danym id
-     * @param id
-     * @return
+     * Retrieves a match by its ID.
+     * @param id The match ID
+     * @return ResponseEntity with the match
      */
     @GetMapping("/matches/{id}")
     public ResponseEntity<Match> getMatchById(@PathVariable("id") long id) {
@@ -68,9 +68,9 @@ public class MatchController {
     }
 
     /**
-     * Zapisuje w bazie nowy mecz
-     * @param match
-     * @return
+     * Saves a new match in the database.
+     * @param match The match to be saved
+     * @return ResponseEntity with the saved match
      */
     @PostMapping("/matches")
     public ResponseEntity<Match> createMatch(@RequestBody Match match) {
@@ -89,10 +89,10 @@ public class MatchController {
     }
 
     /**
-     * Aktualizuje dane meczu
-     * @param id
-     * @param match
-     * @return
+     * Updates the details of a match.
+     * @param id The match ID
+     * @param match The updated match details
+     * @return ResponseEntity with the updated match
      */
     @PutMapping("/matches/{id}")
     public ResponseEntity<Match> updateMatch(@PathVariable("id") long id, @RequestBody Match match) {
@@ -120,9 +120,9 @@ public class MatchController {
     }
 
     /**
-     * Usuwa dane meczu
-     * @param id
-     * @return
+     * Deletes a match.
+     * @param id The match ID
+     * @return ResponseEntity with the HTTP status
      */
     @DeleteMapping("/matches/{id}")
     public ResponseEntity<HttpStatus> deleteMatch(@PathVariable("id") long id) {
@@ -135,8 +135,8 @@ public class MatchController {
     }
 
     /**
-     * Usuwa wszystkie mecze
-     * @return
+     * Deletes all matches.
+     * @return ResponseEntity with the HTTP status
      */
     @DeleteMapping("/matches")
     public ResponseEntity<HttpStatus> deleteAllMatches() {

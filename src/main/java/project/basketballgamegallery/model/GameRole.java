@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represents a game role in a basketball game.
+ */
 @Entity
 @Table(name = "gamerole")
 public class GameRole {
@@ -38,28 +41,74 @@ public class GameRole {
             inverseJoinColumns = { @JoinColumn(name = "player_id") })
     private Set<Player> players = new HashSet<>();
 
+    /**
+     * Default constructor for the GameRole class.
+     */
     public GameRole()
     {
     }
 
+    /**
+     * Constructor for the GameRole class that sets the points.
+     *
+     * @param points the points to set for the game role
+     */
     public GameRole(int points)
     {
         this.points = points;
     }
 
+    /**
+     * Get the ID of the game role.
+     *
+     * @return the ID of the game role
+     */
     public long getId() {
         return id;
     }
+    /**
+     * Get the points of the game role.
+     *
+     * @return the points of the game role
+     */
     public int getPoints() { return points; }
+
+    /**
+     * Set the points of the game role.
+     *
+     * @param points the points to set for the game role
+     */
     public void setPoints(int points) { this.points = points; }
+
+    /**
+     * Get the team associated with the game role.
+     *
+     * @return the team associated with the game role
+     */
     public Team getTeam() { return team; }
+
+    /**
+     * Set the team associated with the game role.
+     *
+     * @param team the team to set for the game role
+     */
     public void setTeam(Team team) { this.team = team; }
 
+    /**
+     * Add a player to the game role.
+     *
+     * @param player the player to add to the game role
+     */
     public void addPlayer(Player player) {
         this.players.add(player);
         player.getGameRoles().add(this);
     }
 
+    /**
+     * Remove a player from the game role.
+     *
+     * @param playerId the ID of the player to remove from the game role
+     */
     public void removePlayer(long playerId) {
         Player player = this.players.stream().filter(p -> p.getId() == playerId).findFirst().orElse(null);
         if (player != null) {
@@ -68,7 +117,18 @@ public class GameRole {
         }
     }
 
+    /**
+     * Get the match associated with the game role.
+     *
+     * @return the match associated with the game role
+     */
     public Match getMatch() { return this.match; }
+
+    /**
+     * Set the match associated with the game role.
+     *
+     * @param match the match to set for the game role
+     */
     public void setMatch(Match match) { this.match = match; }
 
     @Override

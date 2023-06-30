@@ -15,6 +15,9 @@ import project.basketballgamegallery.repository.UserRepository;
 
 import java.util.*;
 
+/**
+ * Controller for handling test-related endpoints.
+ */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/test")
@@ -24,17 +27,23 @@ public class TestController {
     @Autowired
     AccessRightRepository accessRightRepository;
 
+    /**
+     * Returns a welcome message for the BasketballGameGallery site.
+     *
+     * @return The welcome message
+     */
     @GetMapping("/all")
     public String allAccess() {
-        return "Welcome to BasketballGameGallery! This site is designed for basketball enthusiasts." +
-                " We offer a platform to track your favorite players, clubs, and completed matches.";
+        return "Welcome to BasketballGameGallery! This site is designed for basketball enthusiasts. We offer a platform to track your favorite players, clubs, and completed matches.";
     }
 
     /**
-     * Zwraca wszystkich urzytkowników po nazwie lub po adresie email naszego serwisu
-     * @param username
-     * @param email
-     * @return
+     * Retrieves all users by username, email, or role.
+     *
+     * @param username The username to filter users (optional)
+     * @param email    The email to filter users (optional)
+     * @param role     The role to filter users (optional)
+     * @return ResponseEntity with a list of users
      */
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers(
@@ -95,6 +104,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Retrieves all users with the 'USER' role.
+     *
+     * @return ResponseEntity with a list of users
+     */
     @GetMapping("/user")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<User>> getAllByUserRole() {
@@ -105,7 +119,6 @@ public class TestController {
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            System.out.println(new ResponseEntity<>(users, HttpStatus.OK));
             return new ResponseEntity<>(users, HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -113,6 +126,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Retrieves all users with the 'MODERATOR' role.
+     *
+     * @return ResponseEntity with a list of users
+     */
     @GetMapping("/mod")
     @PreAuthorize("hasRole('MODERATOR')")
     public ResponseEntity<List<User>> getAllByModeratorRole() {
@@ -130,6 +148,12 @@ public class TestController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Retrieves all users with the 'ADMIN' role.
+     *
+     * @return ResponseEntity with a list of users
+     */
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<User>> getAllByAdminRole() {
@@ -149,9 +173,10 @@ public class TestController {
     }
 
     /**
-     * Zwraca urzytkownika o zadanym id
-     * @param id
-     * @return
+     * Retrieves a user by their ID.
+     *
+     * @param id The ID of the user
+     * @return ResponseEntity with the user information
      */
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
@@ -164,10 +189,12 @@ public class TestController {
     }
 
     /**
-     * Aktualizuje dane urzytkownika
-     * @param id
-     * @param user
-     * @return
+     * Updates the user information.
+     *
+     * @param id   The ID of the user to update
+     * @param user The updated user object
+     * @return ResponseEntity with the updated user information
+     * @throws JsonProcessingException if there is an error processing the JSON data
      */
     @PutMapping("/user/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) throws JsonProcessingException {
@@ -203,9 +230,10 @@ public class TestController {
     }
 
     /**
-     * Usuwa danego urzytkownika
-     * @param id
-     * @return
+     * Deletes a user by their ID.
+     *
+     * @param id The ID of the user to delete
+     * @return ResponseEntity with the operation status
      */
     @DeleteMapping("/user/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
@@ -218,8 +246,9 @@ public class TestController {
     }
 
     /**
-     * Usuwa wszystkich urzytkownikwów
-     * @return
+     * Deletes all users.
+     *
+     * @return ResponseEntity with the operation status
      */
     @DeleteMapping("/user")
     public ResponseEntity<HttpStatus> deleteAllUsers() {

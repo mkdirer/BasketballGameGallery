@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Kontroler odpowiadajacy za ruting danych dotyczacych graczy
+ * Controller responsible for routing player data
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -22,7 +22,7 @@ public class BasketballerController {
     BasketballerRepository basketballerRepository;
 
     /**
-     * Zwraca wszystkich graczy lub tych zawierajacych podane nazwisko lub nazwe drużyny do której przynależa
+     * Returns all basketball players or those containing the specified last name or team name
      * @param lastname
      * @param team
      * @return
@@ -49,7 +49,7 @@ public class BasketballerController {
     }
 
     /**
-     * Tworzy nowego koszykarza w bazie
+     * Creates a new basketball player in the database
      * @param player
      * @return
      */
@@ -65,7 +65,7 @@ public class BasketballerController {
     }
 
     /**
-     * Zwraca koszykarza o zadanym id
+     * Returns the basketball player with the specified id
      * @param id
      * @return
      */
@@ -80,7 +80,7 @@ public class BasketballerController {
     }
 
     /**
-     * Aktualizuje dane koszykarza
+     * Updates the data of a basketball player
      * @param id
      * @param player
      * @return
@@ -101,7 +101,7 @@ public class BasketballerController {
     }
 
     /**
-     * Usuwa danego koszykarza
+     * Deletes a specific basketball player
      * @param id
      * @return
      */
@@ -116,7 +116,7 @@ public class BasketballerController {
     }
 
     /**
-     * Usuwa wszystkich graczy
+     * Deletes all basketball players
      * @return
      */
     @DeleteMapping("/basketballers")

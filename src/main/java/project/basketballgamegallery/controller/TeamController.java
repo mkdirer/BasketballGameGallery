@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Kontroler rutingu danych o drużynach koszykarskich
+ * Controller for handling basketball team data endpoints.
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -23,9 +23,10 @@ public class TeamController {
     TeamRepository teamRepository;
 
     /**
-     * Zwraca wszystkie drużyny lub te zawierajace okreslona nazwe
-     * @param name
-     * @return
+     * Retrieves all teams or teams containing a specific name.
+     *
+     * @param name The name to filter teams (optional)
+     * @return ResponseEntity with a list of teams
      */
     @GetMapping("/teams")
     public ResponseEntity<List<Team>> getAllTeams(@RequestParam(required = false) String name) {
@@ -45,9 +46,10 @@ public class TeamController {
     }
 
     /**
-     * Zwraca drużyne o danym id
-     * @param id
-     * @return
+     * Retrieves a team by its ID.
+     *
+     * @param id The ID of the team
+     * @return ResponseEntity with the team
      */
     @GetMapping("/teams/{id}")
     public ResponseEntity<Team> getTeamById(@PathVariable("id") long id) {
@@ -60,9 +62,10 @@ public class TeamController {
     }
 
     /**
-     * Tworzy nową drużyne
-     * @param team
-     * @return
+     * Creates a new team.
+     *
+     * @param team The team object to be created
+     * @return ResponseEntity with the created team
      */
     @PostMapping("/teams")
     public ResponseEntity<Team> createTeam(@RequestBody Team team) {
@@ -76,10 +79,11 @@ public class TeamController {
     }
 
     /**
-     * Aktualizuje dane drużyny
-     * @param id
-     * @param team
-     * @return
+     * Updates the details of a team.
+     *
+     * @param id   The ID of the team
+     * @param team The updated team details
+     * @return ResponseEntity with the updated team
      */
     @PutMapping("/teams/{id}")
     public ResponseEntity<Team> updateTeam(@PathVariable("id") long id, @RequestBody Team team) {
@@ -96,9 +100,10 @@ public class TeamController {
     }
 
     /**
-     * Usuwa drużyne o zadanym id
-     * @param id
-     * @return
+     * Deletes a team by its ID.
+     *
+     * @param id The ID of the team
+     * @return ResponseEntity with the HTTP status
      */
     @DeleteMapping("/teams/{id}")
     public ResponseEntity<HttpStatus> deleteTeam(@PathVariable("id") long id) {
@@ -113,8 +118,9 @@ public class TeamController {
     }
 
     /**
-     * Usuwa wszystkie drużyny
-     * @return
+     * Deletes all teams.
+     *
+     * @return ResponseEntity with the HTTP status
      */
     @DeleteMapping("/teams")
     public ResponseEntity<HttpStatus> deleteAllTeams() {
@@ -125,6 +131,13 @@ public class TeamController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Retrieves teams by the specified league.
+     *
+     * @param league The league to filter teams
+     * @return ResponseEntity with a list of teams
+     */
     @GetMapping("/teams/league")
     public ResponseEntity<List<Team>> findByPublished(@RequestParam(required = true) String league) {
         try {

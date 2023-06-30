@@ -28,7 +28,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Klasa odpowiedzialna za ruting serwisu autentykacji
+ * Controller responsible for routing authentication service
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -46,7 +46,7 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     /**
-     * Funkcja odpowiadajaca za logowanie użytkownika
+     * Function responsible for user authentication
      * @param loginRequest
      * @return
      */
@@ -69,7 +69,7 @@ public class AuthController {
     }
 
     /**
-     * Funkcja odpowiedzialna za rejestracje użytkownika
+     * Function responsible for user registration
      * @param signUpRequest
      * @return
      */
@@ -124,7 +124,7 @@ public class AuthController {
     }
 
     /**
-     * Dodanie roli do bazy danych
+     * Add roles to the database
      * @return
      */
     @GetMapping("/addroles")

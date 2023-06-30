@@ -26,6 +26,13 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
         this.authorities = authorities;
     }
+
+    /**
+     * Builds a UserDetailsImpl object based on the User entity.
+     *
+     * @param user the User entity
+     * @return the UserDetailsImpl object
+     */
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = user.getAccessRights().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))

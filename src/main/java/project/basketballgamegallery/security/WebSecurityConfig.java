@@ -16,6 +16,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import project.basketballgamegallery.security.jwt.AuthEntryPointJwt;
 import project.basketballgamegallery.security.jwt.AuthTokenFilter;
 import project.basketballgamegallery.security.services.UserDetailsServiceImpl;
+
+/**
+ * Configuration for web application security.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig{
@@ -24,10 +28,22 @@ public class WebSecurityConfig{
     UserDetailsServiceImpl userDetailsService;
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
+
+    /**
+     * Creates the JWT authentication token filter.
+     *
+     * @return The JWT authentication token filter.
+     */
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
+
+    /**
+     * Creates the DAO authentication provider.
+     *
+     * @return The DAO authentication provider.
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -38,14 +54,35 @@ public class WebSecurityConfig{
         return authProvider;
     }
 
+    /**
+     * Creates the authentication manager.
+     *
+     * @param authConfiguration The authentication configuration.
+     * @return The authentication manager.
+     * @throws Exception If an error occurs while creating the authentication manager.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfiguration) throws Exception {
         return authConfiguration.getAuthenticationManager();
     }
+
+    /**
+     * Creates the password encoder.
+     *
+     * @return The password encoder.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http The HTTP security configuration.
+     * @return The security filter chain.
+     * @throws Exception If an error occurs while configuring the security filter chain.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
